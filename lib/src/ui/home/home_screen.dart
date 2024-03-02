@@ -9,8 +9,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  BuildContext context;
-  ApiService apiService;
+  late ApiService apiService;
 
   @override
   void initState() {
@@ -20,7 +19,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    this.context = context;
     return SafeArea(
       child: FutureBuilder(
         future: apiService.getProfiles(),
@@ -32,7 +30,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   "Something wrong with message: ${snapshot.error.toString()}"),
             );
           } else if (snapshot.connectionState == ConnectionState.done) {
-            List<Profile> profiles = snapshot.data;
+            List<Profile> profiles = snapshot.data!;
             return _buildListView(profiles);
           } else {
             return Center(
@@ -60,14 +58,14 @@ class _HomeScreenState extends State<HomeScreen> {
                   children: <Widget>[
                     Text(
                       profile.first_name + " " + profile.last_name,
-                      style: Theme.of(context).textTheme.title,
+                      style: Theme.of(context).textTheme.headline6,
                     ),
                     Text(profile.email),
                     Text(profile.contact_number.toString()),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: <Widget>[
-                        FlatButton(
+                        TextButton( // Replaced FlatButton with TextButton
                           onPressed: () {
                             showDialog(
                                 context: context,
@@ -77,7 +75,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     content: Text(
                                         "Are you sure want to delete data profile ${profile.first_name} ${profile.last_name}?"),
                                     actions: <Widget>[
-                                      FlatButton(
+                                      TextButton( // Replaced FlatButton with TextButton
                                         child: Text("Yes"),
                                         onPressed: () {
                                           Navigator.pop(context);
@@ -86,12 +84,12 @@ class _HomeScreenState extends State<HomeScreen> {
                                               .then((isSuccess) {
                                             if (isSuccess) {
                                               setState(() {});
-                                              Scaffold.of(this.context)
+                                              ScaffoldMessenger.of(context) // Replaced Scaffold.of(context) with ScaffoldMessenger.of(context)
                                                   .showSnackBar(SnackBar(
                                                       content: Text(
                                                           "Delete data success")));
                                             } else {
-                                              Scaffold.of(this.context)
+                                              ScaffoldMessenger.of(context) // Replaced Scaffold.of(context) with ScaffoldMessenger.of(context)
                                                   .showSnackBar(SnackBar(
                                                       content: Text(
                                                           "Delete data failed")));
@@ -99,7 +97,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                           });
                                         },
                                       ),
-                                      FlatButton(
+                                      TextButton( // Replaced FlatButton with TextButton
                                         child: Text("No"),
                                         onPressed: () {
                                           Navigator.pop(context);
@@ -114,7 +112,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             style: TextStyle(color: Colors.red),
                           ),
                         ),
-                        FlatButton(
+                        TextButton( // Replaced FlatButton with TextButton
                           onPressed: () async {
                             var result = await Navigator.push(context,
                                 MaterialPageRoute(builder: (context) {

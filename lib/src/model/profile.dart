@@ -1,26 +1,26 @@
 import 'dart:convert';
 
 class Profile {
-  int id;
-  String first_name;
-  String last_name;
-  String designation;
-  String department;
-  String email;
-  int contact_number;
-  String dob;
-  String date_of_joining;
+   int id;
+ final String first_name;
+ final String last_name;
+ final String designation;
+ final String department;
+ final String email;
+ final int contact_number;
+ final String dob;
+ final String date_of_joining;
 
   Profile(
-      {this.id = 0,
-      this.first_name,
-      this.last_name,
-      this.designation,
-      this.department,
-      this.email,
-      this.contact_number,
-      this.dob,
-      this.date_of_joining});
+      { this.id = 0,
+     required this.first_name,
+     required this.last_name,
+     required this.designation,
+     required this.department,
+     required this.email,
+     required this.contact_number,
+     required this.dob,
+     required this.date_of_joining});
 
   factory Profile.fromJson(map) {
     return Profile(

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:employeemanagementapp/src/ui/formadd/form_add_screen.dart';
 import 'package:employeemanagementapp/src/ui/home/home_screen.dart';
+import 'package:employeemanagementapp/src/models/profile.dart'; 
 
 GlobalKey<ScaffoldState> _scaffoldState = GlobalKey<ScaffoldState>();
 
@@ -15,7 +16,7 @@ class _AppState extends State<App> {
     return MaterialApp(
       theme: ThemeData(
         primaryColor: Colors.orange,
-        accentColor: Colors.orangeAccent,
+        colorScheme: ColorScheme.fromSwatch().copyWith(secondary: Colors.orangeAccent),
       ),
       home: Scaffold(
         key: _scaffoldState,
@@ -32,7 +33,7 @@ class _AppState extends State<App> {
                 var result = await Navigator.push(
                   _scaffoldState.currentContext,
                   MaterialPageRoute(builder: (BuildContext context) {
-                    return FormAddScreen();
+                    return FormAddScreen(profile: profile); // Pass the profile parameter
                   }),
                 );
                 if (result != null) {
