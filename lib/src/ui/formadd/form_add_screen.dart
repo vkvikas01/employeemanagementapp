@@ -100,7 +100,7 @@ class _FormAddScreenState extends State<FormAddScreen> {
                 _buildTextFieldDateOfJoining(),
                 Padding(
                   padding: const EdgeInsets.only(top: 8.0),
-                  child: RaisedButton(
+                  child: ElevatedButton(
                     child: Text(
                       widget.profile == null
                           ? "Submit".toUpperCase()
@@ -112,7 +112,6 @@ class _FormAddScreenState extends State<FormAddScreen> {
                     onPressed: () {
                       // Submit logic
                     },
-                    color: Colors.orange[600],
                   ),
                 )
               ],
